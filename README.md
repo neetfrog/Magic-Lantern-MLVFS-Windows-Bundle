@@ -3,7 +3,7 @@ Magic Lantern MLVFS Windows Bundle, includes all the files needed to mount MLV f
 To use it download the repository zip and extract it to C:/MLVFS and Dokan [DokanSetup.exe] 
 Run UpdateMenu.reg inside RightClickMountFolder directory to get right click mount option
 
-[img]https://i.ibb.co/gLBJ3HDb/image.png[/img]
+![image]([image-url](https://i.ibb.co/gLBJ3HDb/image.png)
 
 
 Right-click method:
