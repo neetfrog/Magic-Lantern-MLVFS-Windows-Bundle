@@ -107,8 +107,41 @@ Using Resolve's **Audio Sync** method is preferred over manually linking audio i
 # Notes
 
 * This exact version 1.0.3.1000 of Dokan is required. Others didn't work with Windows 11 during my testing.
-* Update batch paths if moving the installation.
-* Adjust MLVFS arguments in .bat file if necessary
+* Adjust MLVFS options/paths in MLV_Controller.bat file if necessary.
+
+# MLVFS options
+
+MLVFS options:
+
+- File/folder options:
+    --mlv-dir=%s           Directory containing MLV files
+    --resolve-naming       DNG file names compatible with DaVinci Resolve
+
+- Processing options:
+    --cs2x2                2x2 chroma smoothing
+    --cs3x3                3x3 chroma smoothing
+    --cs5x5                5x5 chroma smoothing
+    --bad-pix              Fix bad pixels (autodetected)
+    --really-bad-pix       Aggressive bad pixel fix
+    --fix-pattern-noise    Fix row/column noise in shadows (slow)
+    --stripes              Vertical stripe correction in highlights (nonuniform column gains)
+    --deflicker=%d         Per-frame exposure compensation for flicker-free video
+                           (your raw processor must interpret the BaselineExposure DNG tag)
+
+- Dual ISO options:
+    --dual-iso-preview     Preview Dual ISO files (fast)
+    --dual-iso             Render Dual ISO files (high quality)
+    --amaze-edge           Dual ISO: interpolation method (high quality)
+    --mean23               Dual ISO: interpolation method (fast)
+    --no-alias-map         Dual ISO: disable alias map
+    --alias-map            Dual ISO: enable alias map
+
+- Web GUI options:
+    --port=%s              Port used for web GUI (default: 8000)
+    --fps=%f               FPS used for playback in web GUI
+
+- Diagnostic options:
+    --version              Display MLVFS version
 
 # Credits
 
