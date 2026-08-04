@@ -1,112 +1,47 @@
 # Magic Lantern MLVFS Windows Bundle
 
-A complete Windows bundle for **Magic Lantern MLVFS** that includes everything needed to mount `.MLV` files as a virtual drive on Windows.
+Windows bundle for **Magic Lantern MLVFS** to mount `.MLV` files as a virtual drive. Includes MLVFS, Dokan, and an optional Explorer right-click mount option.
 
-This package includes MLVFS, Dokan, and an optional Windows Explorer right-click integration, allowing MLV folders to be mounted without using the command line.
+## Install
 
-## Features
-
-* Mount Magic Lantern `.MLV` files as a virtual drive
-* No need to manually use command line after setup
-* Windows Explorer right-click mounting option
-* Includes required Dokan filesystem driver
-* Designed for easier workflow with DaVinci Resolve
-
----
-
-# Installation
-
-## 1. Install Dokan
-
-Run:
-
-```text
-DokanSetup.exe
-```
-
-and complete the installation.
-
-Restart Windows if required.
-
----
-
-## 2. Extract MLVFS Bundle
-
-Extract the repository to:
+1. Extract to:
 
 ```text
 C:\MLVFS
 ```
 
-The included scripts assume this location.
+2. Install Dokan:
 
-If you install it somewhere else, you will need to update the paths in the scripts.
+```text
+DokanSetup.exe
+```
 
 ---
 
-# Command Line Usage
+# Command Line Mount
 
-Open **Command Prompt as Administrator**.
-
-## Mount MLV Folder
-
-Navigate to the MLVFS folder:
+Run **CMD as Administrator**:
 
 ```bat
 cd C:\MLVFS\MLVFS_x64_lossless
-```
-
-Run:
-
-```bat
 mlvfs_x64_lossless.exe Z:\ --mlv-dir=C:\MLVDirectory --resolve-naming
 ```
 
-Change the following values:
+Change:
 
-* `Z:\`
-  The drive letter where the MLV files will be mounted.
+* `Z:\` → mount drive letter
+* `C:\MLVDirectory` → folder containing `.MLV` files
 
-* `C:\MLVDirectory`
-  The folder containing your `.MLV` files.
-
-Example:
-
-```bat
-mlvfs_x64_lossless.exe X:\ --mlv-dir=D:\Camera\MLV --resolve-naming
-```
-
-After mounting, the virtual drive will appear in Windows Explorer.
-
----
-
-# Unmounting
-
-To unmount the virtual drive:
-
-Open **Command Prompt as Administrator**.
-
-Navigate to the Dokan installation directory:
+Unmount:
 
 ```bat
 cd "C:\Program Files\Dokan\Dokan Library-1.0.3"
-```
-
-Run:
-
-```bat
 dokanctl.exe /u
 ```
 
-> The Dokan folder name may be different depending on the installed version.
-
 ---
 
-# Windows Explorer Right-Click Mounting
-
-The bundle includes a Windows Explorer context menu option for easier mounting.
-
-## Enable Right-Click Menu
+# Explorer Right-Click Mount
 
 Run:
 
@@ -114,149 +49,67 @@ Run:
 RightClickMountFolder\UpdateMenu.reg
 ```
 
-This adds:
+This adds **Mount folder with MLVFS** to Windows Explorer.
 
-```text
-Mount folder with MLVFS
-```
-
-to the Windows Explorer right-click menu.
-
-After installation:
-
-1. Right-click a folder containing `.MLV` files.
-
-2. Select:
-
-   ```
-   Mount folder with MLVFS
-   ```
-
-3. The folder will automatically mount as a virtual drive.
-
-![Windows Explorer right-click menu](https://i.ibb.co/gLBJ3HDb/image.png)
-
----
-
-## Custom Installation Location
-
-The right-click scripts expect MLVFS to be located at:
+If MLVFS is not installed at:
 
 ```text
 C:\MLVFS
 ```
 
-If your installation is somewhere else, edit:
+edit:
 
 ```text
 RightClickMountFolder\MLV_Controller.bat
 ```
 
-and update the paths accordingly.
+![Windows Explorer right-click menu](https://i.ibb.co/gLBJ3HDb/image.png)
 
 ---
 
-# DaVinci Resolve Workflow (60fps Footage)
+# DaVinci Resolve (60fps Workflow)
 
-When importing 60fps footage into DaVinci Resolve, the audio from the `.wav` files is not automatically synchronized with the DNG image sequences.
+DNG sequences do not auto-sync WAV audio.
 
-The recommended workflow is to sync audio inside the **Media** workspace before editing.
+In the **Media** workspace:
 
----
-
-## Sync Audio With DNG Clips
-
-For each DNG sequence:
-
-1. Open the **Media** workspace.
-
-2. Select:
-
-   * The `.dng` clip
-   * The matching `.wav` file with the same filename
-
-3. Right-click and select:
+1. Select matching `.dng` + `.wav`
+2. Right-click:
 
 ```text
 Audio Sync > Auto Sync Audio
 ```
 
-4. Choose:
+3. Select:
 
 ```text
-Sync Method: Based on Timecode
+Based on Timecode
 ```
 
-5. Repeat for every matching DNG + WAV pair.
+Repeat for each clip pair.
 
-Currently, there does not appear to be a reliable way to batch sync all DNG and WAV pairs automatically.
+Then drag the synced DNG clips from the Media Pool into the timeline.
 
----
-
-## Add Synced Clips to Timeline
-
-After syncing:
-
-1. Go to the **Edit** page.
-2. Select the synced DNG clips.
-3. Drag them into the timeline.
-
-The audio will now be embedded with the DNG clips.
-
----
-
-## Filtering DNG Clips in Media Pool
-
-The MLVFS workflow may create additional files such as preview GIFs or WAV files.
-
-To quickly select only the video clips:
-
-1. Open the Media Pool.
-2. Use the search/filter option.
-3. Search for:
+Tip: Filter Media Pool by:
 
 ```text
 dng
 ```
 
-4. Select the DNG clips and drag them into the timeline.
+to select only DNG clips.
 
----
-
-## Why Use Audio Sync Instead of Linking Clips?
-
-Manually linking video and audio clips in the Edit page works, but it has limitations.
-
-Using:
-
-```text
-Audio Sync > Auto Sync Audio
-```
-
-creates a properly synchronized clip inside Resolve and provides better editing behavior.
-
-Advantages:
-
-* Proper audio retiming controls
-* Better clip management
-* More reliable timeline editing
-* Audio stays attached to the source clip
-
-For high frame rate MLV footage (such as 60fps), syncing through the Media workspace gives the best results.
+Using Resolve's **Audio Sync** method is preferred over manually linking audio in the timeline because it keeps proper clip/audio retiming behavior.
 
 ---
 
 # Notes
 
-* Run MLVFS with Administrator privileges.
-* Dokan must be installed before mounting MLV folders.
-* The right-click mounting script assumes the default installation path.
-* If paths are changed, update the batch scripts.
-* Use `--resolve-naming` to avoid filename conflicts when multiple clips contain similarly named frames.
-
----
+* Run MLVFS as Administrator.
+* Dokan is required.
+* Update batch paths if moving the installation.
+* `--resolve-naming` prevents filename conflicts.
 
 # Credits
 
-* **Magic Lantern developers** — MLVFS and MLV tools
-* **Dokan Project** — Windows filesystem driver
+Magic Lantern developers — MLVFS
+Dokan Project — filesystem driver
