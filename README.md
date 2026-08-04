@@ -104,7 +104,7 @@ Using Resolve's **Audio Sync** method is preferred over manually linking audio i
 
 # Notes
 
-* This exact version of Dokan is required.
+* This exact version 1.0.3.1000 of Dokan is required. Others didn't work with Windows 11 during my testing.
 * Update batch paths if moving the installation.
 * Adjust MLVFS arguments in .bat file if necessary
 
