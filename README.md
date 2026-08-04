@@ -30,7 +30,7 @@ RightClickMountFolder\UpdateMenu.reg
 
 This adds **Mount folder with MLVFS** to Windows Explorer.
 
-If MLVFS is not installed at:
+If MLVFS bundle is located in other directory than:
 
 ```text
 C:\MLVFS
