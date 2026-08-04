@@ -4,9 +4,7 @@ Windows bundle for **Magic Lantern MLVFS** to mount `.MLV` files as a virtual dr
 
 ![Windows Explorer right-click menu](https://i.ibb.co/gLBJ3HDb/image.png)
 
-![Windows Explorer right-click menu](https://i.ibb.co/b5yqdGw3/image.png)
-
-^ im using OneCommander for explorer in the screenshot https://onecommander.com/
+![Windows Explorer right-click menu](https://i.ibb.co/NnSRvRFP/image.png)
 
 
 https://www.magiclantern.fm/forum/index.php?topic=13152.0 <- MLVFS thread on Magic Lantern forums
