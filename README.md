@@ -4,6 +4,8 @@ Windows bundle for **Magic Lantern MLVFS** to mount `.MLV` files as a virtual dr
 
 https://www.magiclantern.fm/forum/index.php?topic=13152.0 <- MLVFS thread on Magic Lantern forums
 
+![Windows Explorer right-click menu](https://i.ibb.co/gLBJ3HDb/image.png)
+
 ## Install
 
 1. Download the repository and extract to:
@@ -42,7 +44,6 @@ edit:
 RightClickMountFolder\MLV_Controller.bat
 ```
 
-![Windows Explorer right-click menu](https://i.ibb.co/gLBJ3HDb/image.png)
 
 # Command Line Mount
 
