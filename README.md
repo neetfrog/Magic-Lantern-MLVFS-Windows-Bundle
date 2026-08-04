@@ -113,5 +113,4 @@ Using Resolve's **Audio Sync** method is preferred over manually linking audio i
 
 # Credits
 
-Magic Lantern developers — MLVFS
-Dokan Project — filesystem driver
+Magic Lantern community & Dokan Project 
