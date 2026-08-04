@@ -6,7 +6,7 @@ https://www.magiclantern.fm/forum/index.php?topic=13152.0 <- MLVFS thread on Mag
 
 ## Install
 
-1. Extract to:
+1. Download the repository and extract to:
 
 ```text
 C:\MLVFS
