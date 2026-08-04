@@ -18,27 +18,6 @@ DokanSetup.exe
 
 ---
 
-# Command Line Mount
-
-Run **CMD as Administrator**:
-
-```bat
-cd C:\MLVFS\MLVFS_x64_lossless
-mlvfs_x64_lossless.exe Z:\ --mlv-dir=C:\MLVDirectory --resolve-naming
-```
-
-Change:
-
-* `Z:\` → mount drive letter
-* `C:\MLVDirectory` → folder containing `.MLV` files
-
-Unmount:
-
-```bat
-cd "C:\Program Files\Dokan\Dokan Library-1.0.3"
-dokanctl.exe /u
-```
-
 ---
 
 # Explorer Right-Click Mount
@@ -64,6 +43,29 @@ RightClickMountFolder\MLV_Controller.bat
 ```
 
 ![Windows Explorer right-click menu](https://i.ibb.co/gLBJ3HDb/image.png)
+
+# Command Line Mount
+
+Run **CMD as Administrator**:
+
+```bat
+cd C:\MLVFS\MLVFS_x64_lossless
+mlvfs_x64_lossless.exe Z:\ --mlv-dir=C:\MLVDirectory --resolve-naming
+```
+
+Change:
+
+* `Z:\` → mount drive letter
+* `C:\MLVDirectory` → folder containing `.MLV` files
+
+Unmount:
+
+```bat
+cd "C:\Program Files\Dokan\Dokan Library-1.0.3"
+dokanctl.exe /u
+```
+
+
 
 ---
 
