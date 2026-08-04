@@ -111,7 +111,6 @@ Using Resolve's **Audio Sync** method is preferred over manually linking audio i
 
 # MLVFS options
 
-MLVFS options:
 ```text
 - File/folder options:
     --mlv-dir=%s           Directory containing MLV files
