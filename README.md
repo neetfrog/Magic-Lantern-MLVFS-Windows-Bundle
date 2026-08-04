@@ -1,18 +1,31 @@
 # Magic Lantern MLVFS Windows Bundle
 
-Windows bundle for **Magic Lantern MLVFS** to mount `.MLV` files as a virtual drive. Includes MLVFS, Dokan, and an optional Explorer right-click mount option.
+Windows bundle for **Magic Lantern MLVFS** to mount `.MLV` files as a virtual drive.
 
-https://www.magiclantern.fm/forum/index.php?topic=13152.0 <- MLVFS thread on Magic Lantern forums
+Includes:
 
-## Install
+- MLVFS
+- Dokan
+- Optional Windows Explorer right-click mount integration
 
-1. Download the repository and extract to:
+MLVFS forum thread:  
+https://www.magiclantern.fm/forum/index.php?topic=13152.0
+
+---
+
+# Installation
+
+## 1. Extract the bundle
+
+Download and extract the repository to:
 
 ```text
 C:\MLVFS
 ```
 
-2. Install Dokan:
+## 2. Install Dokan
+
+Run:
 
 ```text
 DokanSetup.exe
@@ -28,9 +41,19 @@ Run:
 RightClickMountFolder\UpdateMenu.reg
 ```
 
-This adds **Mount folder with MLVFS** to Windows Explorer.
+This adds:
 
-If MLVFS bundle is located in other directory than:
+```text
+Mount folder with MLVFS
+```
+
+to the Windows Explorer right-click menu.
+
+![Windows Explorer right-click menu](https://i.ibb.co/gLBJ3HDb/image.png)
+
+## Custom installation path
+
+If the MLVFS bundle is installed somewhere other than:
 
 ```text
 C:\MLVFS
@@ -42,40 +65,55 @@ edit:
 RightClickMountFolder\MLV_Controller.bat
 ```
 
-![Windows Explorer right-click menu](https://i.ibb.co/gLBJ3HDb/image.png)
+and update the paths accordingly.
+
+---
 
 # Command Line Mount
 
-Run **CMD as Administrator**:
+Open **Command Prompt as Administrator**:
 
 ```bat
 cd C:\MLVFS\MLVFS_x64_lossless
+
 mlvfs_x64_lossless.exe Z:\ --mlv-dir=C:\MLVDirectory --resolve-naming
 ```
 
 Change:
 
-* `Z:\` → mount drive letter
-* `C:\MLVDirectory` → folder containing `.MLV` files
+| Parameter | Description |
+|---|---|
+| `Z:\` | Drive letter used for the virtual mount |
+| `C:\MLVDirectory` | Folder containing `.MLV` files |
 
-Unmount:
+## Unmount
+
+Run:
 
 ```bat
 cd "C:\Program Files\Dokan\Dokan Library-1.0.3"
+
 dokanctl.exe /u
 ```
 
-
-
 ---
 
-# DaVinci Resolve Workflow 
+# DaVinci Resolve Workflow
 
-if DNG sequences do not auto-sync WAV audio (happens with 60fps footage using 5dmk3, not sure about the other modes/cameras) do the following:
+If DNG sequences do not automatically sync WAV audio:
+
+*(Known to happen with 60fps footage from the 5D Mark III. Other cameras/modes may vary.)*
+
+## Sync audio
 
 In the **Media** workspace:
 
-1. Select matching `.dng` + `.wav`
+1. Select the matching:
+
+```text
+.dng sequence + .wav file
+```
+
 2. Right-click:
 
 ```text
@@ -88,61 +126,101 @@ Audio Sync > Auto Sync Audio
 Based on Timecode
 ```
 
-Repeat for each clip pair.
+4. Repeat for each clip pair.
 
 Then drag the synced DNG clips from the Media Pool into the timeline.
 
-Tip: Filter Media Pool by:
+## Tip
+
+Filter the Media Pool using:
 
 ```text
 dng
 ```
 
-to select only DNG clips.
+to show only DNG clips.
 
-Using Resolve's **Audio Sync** method is preferred over manually linking audio in the timeline because it keeps proper clip/audio retiming behavior.
+Using Resolve's built-in **Audio Sync** workflow is preferred over manually linking audio in the timeline because it preserves proper clip/audio retiming behavior.
 
 ---
 
 # Notes
 
-* This exact version 1.0.3.1000 of Dokan is required. Others didn't work with Windows 11 during my testing.
-* Adjust MLVFS options/paths in MLV_Controller.bat file if necessary.
+- This exact Dokan version is required:
 
-# MLVFS options
+```text
+Dokan Library 1.0.3.1000
+```
 
-MLVFS options:
+  Other versions did not work correctly with Windows 11 during testing.
 
-- File/folder options:
-    --mlv-dir=%s           Directory containing MLV files
-    --resolve-naming       DNG file names compatible with DaVinci Resolve
+- Adjust MLVFS options and paths in:
 
-- Processing options:
-    --cs2x2                2x2 chroma smoothing
-    --cs3x3                3x3 chroma smoothing
-    --cs5x5                5x5 chroma smoothing
-    --bad-pix              Fix bad pixels (autodetected)
-    --really-bad-pix       Aggressive bad pixel fix
-    --fix-pattern-noise    Fix row/column noise in shadows (slow)
-    --stripes              Vertical stripe correction in highlights (nonuniform column gains)
-    --deflicker=%d         Per-frame exposure compensation for flicker-free video
-                           (your raw processor must interpret the BaselineExposure DNG tag)
+```text
+MLV_Controller.bat
+```
 
-- Dual ISO options:
-    --dual-iso-preview     Preview Dual ISO files (fast)
-    --dual-iso             Render Dual ISO files (high quality)
-    --amaze-edge           Dual ISO: interpolation method (high quality)
-    --mean23               Dual ISO: interpolation method (fast)
-    --no-alias-map         Dual ISO: disable alias map
-    --alias-map            Dual ISO: enable alias map
+if required.
 
-- Web GUI options:
-    --port=%s              Port used for web GUI (default: 8000)
-    --fps=%f               FPS used for playback in web GUI
+---
 
-- Diagnostic options:
-    --version              Display MLVFS version
+# MLVFS Options
+
+## File / Folder Options
+
+| Option | Description |
+|---|---|
+| `--mlv-dir=%s` | Directory containing MLV files |
+| `--resolve-naming` | Use DNG filenames compatible with DaVinci Resolve |
+
+---
+
+## Processing Options
+
+| Option | Description |
+|---|---|
+| `--cs2x2` | 2x2 chroma smoothing |
+| `--cs3x3` | 3x3 chroma smoothing |
+| `--cs5x5` | 5x5 chroma smoothing |
+| `--bad-pix` | Fix bad pixels (autodetected) |
+| `--really-bad-pix` | Aggressive bad pixel correction |
+| `--fix-pattern-noise` | Fix row/column noise in shadows (slow) |
+| `--stripes` | Vertical stripe correction in highlights (nonuniform column gains) |
+| `--deflicker=%d` | Per-frame exposure compensation for flicker-free video. Raw processor must interpret the BaselineExposure DNG tag |
+
+---
+
+## Dual ISO Options
+
+| Option | Description |
+|---|---|
+| `--dual-iso-preview` | Preview Dual ISO files (fast) |
+| `--dual-iso` | Render Dual ISO files (high quality) |
+| `--amaze-edge` | Dual ISO interpolation method (high quality) |
+| `--mean23` | Dual ISO interpolation method (fast) |
+| `--no-alias-map` | Disable alias map |
+| `--alias-map` | Enable alias map |
+
+---
+
+## Web GUI Options
+
+| Option | Description |
+|---|---|
+| `--port=%s` | Port used for Web GUI (default: `8000`) |
+| `--fps=%f` | FPS used for playback in Web GUI |
+
+---
+
+## Diagnostic Options
+
+| Option | Description |
+|---|---|
+| `--version` | Display MLVFS version |
+
+---
 
 # Credits
 
-Magic Lantern community & Dokan Project 
+- Magic Lantern community
+- Dokan Project
