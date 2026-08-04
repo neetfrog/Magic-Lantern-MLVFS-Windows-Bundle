@@ -69,9 +69,7 @@ dokanctl.exe /u
 
 ---
 
-# DaVinci Resolve (60fps Workflow)
-
-DNG sequences do not auto-sync WAV audio.
+# DaVinci Resolve Workflow if DNG sequences do not auto-sync WAV audio (happens with 60fps footage using 5dmk3, not sure about the other modes/cameras)
 
 In the **Media** workspace:
 
@@ -106,10 +104,9 @@ Using Resolve's **Audio Sync** method is preferred over manually linking audio i
 
 # Notes
 
-* Run MLVFS as Administrator.
 * Dokan is required.
 * Update batch paths if moving the installation.
-* `--resolve-naming` prevents filename conflicts.
+* Adjust MLVFS arguments in .bat file if necessary
 
 # Credits
 
