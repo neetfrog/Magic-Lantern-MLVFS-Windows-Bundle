@@ -3,6 +3,8 @@
 Windows bundle for **Magic Lantern MLVFS** to mount `.MLV` files as a virtual drive. Includes MLVFS, Dokan, and an optional Explorer right-click mount option.
 
 ![Windows Explorer right-click menu](https://i.ibb.co/gLBJ3HDb/image.png)
+![Windows Explorer right-click menu2]([https://i.ibb.co/gLBJ3HDb/image.png](https://i.ibb.co/b5yqdGw3/image.png
+))
 
 https://www.magiclantern.fm/forum/index.php?topic=13152.0 <- MLVFS thread on Magic Lantern forums
 
