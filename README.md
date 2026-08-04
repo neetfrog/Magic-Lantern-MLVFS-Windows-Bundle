@@ -69,7 +69,9 @@ dokanctl.exe /u
 
 ---
 
-# DaVinci Resolve Workflow if DNG sequences do not auto-sync WAV audio (happens with 60fps footage using 5dmk3, not sure about the other modes/cameras)
+# DaVinci Resolve Workflow 
+
+if DNG sequences do not auto-sync WAV audio (happens with 60fps footage using 5dmk3, not sure about the other modes/cameras) do the following:
 
 In the **Media** workspace:
 
