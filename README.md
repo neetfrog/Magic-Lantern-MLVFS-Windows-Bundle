@@ -104,7 +104,7 @@ Using Resolve's **Audio Sync** method is preferred over manually linking audio i
 
 # Notes
 
-* Dokan is required.
+* This exact version of Dokan is required.
 * Update batch paths if moving the installation.
 * Adjust MLVFS arguments in .bat file if necessary
 
