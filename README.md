@@ -20,8 +20,6 @@ DokanSetup.exe
 
 ---
 
----
-
 # Explorer Right-Click Mount
 
 Run:
