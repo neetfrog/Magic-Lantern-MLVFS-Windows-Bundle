@@ -1,27 +1,27 @@
 # Magic Lantern MLVFS Windows Bundle
 
-Mount `.MLV` files as a virtual drive using **MLVFS + Dokan**.
+Windows bundle for **Magic Lantern MLVFS** to mount `.MLV` files as a virtual drive.
 
-MLVFS thread:  
+Includes:
+
+- MLVFS
+- Dokan
+- Optional Windows Explorer right-click mount option
+
+MLVFS thread:
 https://www.magiclantern.fm/forum/index.php?topic=13152.0
 
 ---
 
-# Install
+# Installation
 
-Extract to:
+1. Download the repository and extract it to:
 
-```text
 C:\MLVFS
-```
 
-Install Dokan:
+2. Install Dokan:
 
-```text
 DokanSetup.exe
-```
-
-> Tested with **Dokan Library 1.0.3.1000** on Windows 11. Other versions may not work.
 
 ---
 
@@ -29,151 +29,170 @@ DokanSetup.exe
 
 Run:
 
-```text
 RightClickMountFolder\UpdateMenu.reg
-```
 
-Adds:
+This adds:
 
-```text
 Mount folder with MLVFS
-```
 
-to Explorer.
+to Windows Explorer.
 
-If installed somewhere else, edit:
+If the MLVFS bundle is located somewhere other than:
 
-```text
+C:\MLVFS
+
+edit:
+
 RightClickMountFolder\MLV_Controller.bat
-```
 
 ---
 
-# Manual Mount
+# Command Line Mount
 
 Run CMD as Administrator:
 
-```bat
 cd C:\MLVFS\MLVFS_x64_lossless
 
 mlvfs_x64_lossless.exe Z:\ --mlv-dir=C:\MLVDirectory --resolve-naming
-```
 
 Change:
 
-- `Z:\` → virtual drive letter
-- `C:\MLVDirectory` → folder containing `.MLV` files
+Z:\  
+Mount drive letter
+
+C:\MLVDirectory  
+Folder containing `.MLV` files
 
 Unmount:
 
-```bat
-dokanctl.exe /u
-```
+cd "C:\Program Files\Dokan\Dokan Library-1.0.3"
 
-(location: `C:\Program Files\Dokan\Dokan Library-1.0.3`)
+dokanctl.exe /u
+
 
 ---
 
-# DaVinci Resolve
+# DaVinci Resolve Workflow
 
-For DNG + WAV clips that do not auto-sync:
+If DNG sequences do not automatically sync WAV audio (for example, some 60fps footage from 5D Mark III), do the following:
 
-1. Media workspace
-2. Select `.dng` + `.wav`
+1. Open the Media workspace.
+
+2. Select matching:
+
+.dng sequence + .wav file
+
 3. Right-click:
 
-```text
-Audio Sync → Auto Sync Audio → Based on Timecode
-```
+Audio Sync > Auto Sync Audio
 
-4. Drag synced clips to timeline.
+4. Select:
+
+Based on Timecode
+
+Repeat for each clip pair.
+
+Then drag the synced DNG clips from the Media Pool into the timeline.
 
 Tip:
 
-```text
-Filter Media Pool: dng
-```
+Filter Media Pool by:
+
+dng
+
+to show only DNG clips.
+
+Using Resolve's Audio Sync feature is preferred over manually adding audio in the timeline because it keeps proper clip and retiming behavior.
 
 ---
 
-# Common MLVFS Options
+# MLVFS Options
 
-## Recommended
+## File / Folder Options
 
-```text
+--mlv-dir=<path>
+    Directory containing MLV files
+
 --resolve-naming
-```
+    DNG filenames compatible with DaVinci Resolve
 
-Resolve-compatible DNG filenames.
 
-## Processing
+## Processing Options
 
-```text
---cs2x2 / --cs3x3 / --cs5x5
-```
+--cs2x2
+    2x2 chroma smoothing
 
-Chroma smoothing.
+--cs3x3
+    3x3 chroma smoothing
 
-```text
+--cs5x5
+    5x5 chroma smoothing
+
 --bad-pix
+    Fix bad pixels (autodetected)
+
 --really-bad-pix
-```
+    Aggressive bad pixel fix
 
-Bad pixel correction.
-
-```text
 --fix-pattern-noise
-```
+    Fix row/column noise in shadows (slow)
 
-Shadow row/column noise reduction (slow).
-
-```text
 --stripes
-```
+    Vertical stripe correction in highlights
+    (nonuniform column gains)
 
-Highlight stripe correction.
+--deflicker=<value>
+    Per-frame exposure compensation for flicker-free video.
+    Raw processor must interpret the BaselineExposure DNG tag.
 
-```text
---deflicker=N
-```
 
-Per-frame exposure compensation.
+## Dual ISO Options
 
-## Dual ISO
-
-```text
 --dual-iso-preview
-```
-Fast preview.
+    Preview Dual ISO files (fast)
 
-```text
 --dual-iso
-```
-High-quality render.
+    Render Dual ISO files (high quality)
 
-Interpolation:
+--amaze-edge
+    Dual ISO interpolation method (high quality)
 
-```text
---amaze-edge   (quality)
---mean23       (speed)
-```
+--mean23
+    Dual ISO interpolation method (fast)
 
-## Web GUI
+--no-alias-map
+    Disable alias map
 
-```text
---port=8000
---fps=N
-```
+--alias-map
+    Enable alias map
 
-## Info
 
-```text
+## Web GUI Options
+
+--port=<value>
+    Port used for web GUI (default: 8000)
+
+--fps=<value>
+    FPS used for playback in web GUI
+
+
+## Diagnostic Options
+
 --version
-```
+    Display MLVFS version
+
+
+---
+
+# Notes
+
+- Dokan version 1.0.3.1000 is required.
+- Other Dokan versions did not work with Windows 11 during testing.
+- Adjust MLVFS options and paths in MLV_Controller.bat if necessary.
+
 
 ---
 
 # Credits
 
-Magic Lantern community  
-Dokan Project
+Magic Lantern community & Dokan Project
